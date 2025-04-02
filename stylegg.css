@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: sans-serif;
+    background-color: #eef2f3;
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,19 +10,24 @@ body {
   }
   
   .container {
-    background: white;
+    background: #fff;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     width: 300px;
+    text-align: center;
   }
   
   h1 {
     margin-bottom: 1rem;
   }
   
-  button.option {
+  #question {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  button {
     display: block;
     width: 100%;
     margin: 0.5rem 0;
@@ -34,7 +39,7 @@ body {
     cursor: pointer;
   }
   
-  button.option:hover {
+  button:hover {
     background-color: #45a049;
   }
   
