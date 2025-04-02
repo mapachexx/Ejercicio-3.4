@@ -10,10 +10,25 @@ function generateQuestion() {
     const options = new Set();
     options.add(correctAnswer);
     while (options.size < 4) {
-      const fake = correctAnswer + Math.floor(Math.random() * 10 - 5);
-      if (fake !== correctAnswer && fake >= 0) {
-        options.add(fake);
-      }
+        if (options.size == 1) break;
+            const fake = correctAnswer + Math.floor(Math.random() * 10 - 5);
+            if (fake !== correctAnswer && fake >= 0) {
+            options.add(fake);
+        }
+        if (options.size == 2 ) break;
+            fake = correctAnswer + Math.floor(Math.random() * 40 - 20);
+            if (Math.abs(correctAnswer - fake) > 5) {
+                if (fake !== correctAnswer && fake >= 0) {
+                options.add(fake);
+            }
+        }
+        if (options.size == 3 ) break;
+            fake = correctAnswer + Math.floor(Math.random() * 100 - 50);
+            if (Math.abs(correctAnswer - fake) > 5) {
+                if (fake !== correctAnswer && fake >= 0) {
+                options.add(fake);
+            }
+        }
     }
   
     const shuffled = Array.from(options).sort(() => Math.random() - 0.5);

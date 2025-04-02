@@ -12,6 +12,13 @@ const continuarBtn = document.getElementById("continuar");
 const aciertosElem = document.getElementById("aciertos");
 const erroresElem = document.getElementById("errores");
 
+pregunta = {
+    texto : String,
+    respuesta : String,
+    opciones : [String],
+};
+
+
 let respuestaCorrecta;
 
 function nuevaPregunta() {
@@ -28,11 +35,8 @@ function nuevaPregunta() {
             opciones.push(opcion);
         }
     }
-
-    // Mezclar opciones
     opciones.sort(() => Math.random() - 0.5);
 
-    // Asignar opciones a los botones
     for (let i = 0; i < botones.length; i++) {
         botones[i].textContent = opciones[i];
         botones[i].onclick = () => verificarRespuesta(opciones[i]);
