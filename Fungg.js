@@ -1,3 +1,6 @@
+let aciertos = 0;
+let errores = 0;
+
 function generateQuestion() {
     const_max_num = 50;
     const num1 = Math.floor(Math.random() * const_max_num);
@@ -10,24 +13,27 @@ function generateQuestion() {
     const options = new Set();
     options.add(correctAnswer);
     while (options.size < 4) {
-        if (options.size == 1) break;
+        if (options.size == 1){
             const fake = correctAnswer + Math.floor(Math.random() * 10 - 5);
             if (fake !== correctAnswer && fake >= 0) {
             options.add(fake);
+          }
         }
-        if (options.size == 2 ) break;
+        if (options.size == 2 ){
             fake = correctAnswer + Math.floor(Math.random() * 40 - 20);
             if (Math.abs(correctAnswer - fake) > 5) {
                 if (fake !== correctAnswer && fake >= 0) {
                 options.add(fake);
             }
+          }
         }
-        if (options.size == 3 ) break;
+        if (options.size == 3 ) {
             fake = correctAnswer + Math.floor(Math.random() * 100 - 50);
             if (Math.abs(correctAnswer - fake) > 5) {
                 if (fake !== correctAnswer && fake >= 0) {
                 options.add(fake);
             }
+          }
         }
     }
   
@@ -50,13 +56,22 @@ function generateQuestion() {
     if (selected === correct) {
       feedback.textContent = '¡Correcto!';
       feedback.style.color = 'green';
+      aciertos++;
     } else {
       feedback.textContent = 'Incorrecto.';
       feedback.style.color = 'red';
+      errores++;
     }
-  
+    
+    updateCounters();
     setTimeout(generateQuestion, 1000);
   }
   
+
+  function updateCounters() {
+    document.getElementById('aciertos').textContent = aciertos;
+    document.getElementById('errores').textContent = errores;
+  }
+
   document.addEventListener('DOMContentLoaded', generateQuestion);
   
