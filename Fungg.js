@@ -5,9 +5,41 @@ function generateQuestion() {
     const_max_num = 50;
     const num1 = Math.floor(Math.random() * const_max_num);
     const num2 = Math.floor(Math.random() * const_max_num);
-    const correctAnswer = num1 + num2;
-  
-    const questionText = `${num1} + ${num2}`;
+    const num3 = Math.floor(Math.random() * const_max_num);
+    let correctAnswer;
+    let questionText;
+    if(aciertos < 5){
+      correctAnswer = num1 + num2;
+      questionText = `${num1} + ${num2}`;
+    }else if (aciertos < 10){
+      const numCase = Math.floor(Math.random() * 2);
+      switch (numCase) {
+          case 0:
+              correctAnswer = num1 + num2;
+              questionText = `${num1} + ${num2}`;
+              break;
+          case 1:
+              correctAnswer = num1 - num2;
+              questionText = `${num1} - ${num2}`;
+              break;
+      }
+    } else{
+      const numCase = Math.floor(Math.random() * 3);
+        switch (numCase) {
+            case 0:
+                correctAnswer = num1 + num2 + num3;
+                questionText = `${num1} + ${num2} + ${num3}`;
+                break;
+            case 1:
+                correctAnswer = num1 - num2 - num3;
+                questionText = `${num1} - ${num2} - ${num3}`;
+                break;
+            case 2:
+                correctAnswer = num1 - num2 + num3;
+                questionText = `${num1} - ${num2} + ${num3}`;
+                break;
+        }
+    }
     document.getElementById('question').textContent = `¿Cuál es el resultado de ${questionText}?`;
   
     const options = new Set();
