@@ -2,7 +2,7 @@ let aciertos = 0;
 let errores = 0;
 
 function generateQuestion() {
-    const_max_num = 50;
+    const const_max_num = 50;
     const num1 = Math.floor(Math.random() * const_max_num);
     const num2 = Math.floor(Math.random() * const_max_num);
     const num3 = Math.floor(Math.random() * const_max_num);
@@ -46,23 +46,23 @@ function generateQuestion() {
     options.add(correctAnswer);
     while (options.size < 4) {
         if (options.size == 1){
-            const fake = correctAnswer + Math.floor(Math.random() * 10 - 5);
-            if (fake !== correctAnswer && fake >= 0) {
+            let fake = correctAnswer + Math.floor(Math.random() * 10 - 5);
+            if (fake !== correctAnswer) {
             options.add(fake);
           }
         }
         if (options.size == 2 ){
-            fake = correctAnswer + Math.floor(Math.random() * 40 - 20);
+            let fake = correctAnswer + Math.floor(Math.random() * 40 - 20);
             if (Math.abs(correctAnswer - fake) > 5) {
-                if (fake !== correctAnswer && fake >= 0) {
+                if (fake !== correctAnswer) {
                 options.add(fake);
             }
           }
         }
         if (options.size == 3 ) {
-            fake = correctAnswer + Math.floor(Math.random() * 100 - 50);
+            let fake = correctAnswer + Math.floor(Math.random() * 100 - 50);
             if (Math.abs(correctAnswer - fake) > 5) {
-                if (fake !== correctAnswer && fake >= 0) {
+                if (fake !== correctAnswer) {
                 options.add(fake);
             }
           }
