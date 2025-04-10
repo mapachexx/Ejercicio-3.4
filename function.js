@@ -1,63 +1,93 @@
-let aciertos = 0;
-let errores = 0;
-
 const preguntaElem = document.getElementById("pregunta");
-const botones = [
-    document.getElementById("boton1"),
-    document.getElementById("boton2"),
-    document.getElementById("boton3"),
-    document.getElementById("boton4"),
-];
-const continuarBtn = document.getElementById("continuar");
+const opcionesElem = document.getElementById("opciones");
 const aciertosElem = document.getElementById("aciertos");
 const erroresElem = document.getElementById("errores");
 
-pregunta = {
-    texto : String,
-    respuesta : String,
-    opciones : [String],
-};
+let aciertos = 0;
+let errores = 0;
 
-
-let respuestaCorrecta;
-
-function nuevaPregunta() {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    respuestaCorrecta = num1 + num2;
-
-    preguntaElem.textContent = `¿Cuánto es ${num1} + ${num2}?`;
-
-    const opciones = [respuestaCorrecta];
-    while (opciones.length < 4) {
-        const opcion = Math.floor(Math.random() * 20) + 1;
-        if (!opciones.includes(opcion)) {
-            opciones.push(opcion);
-        }
-    }
-    opciones.sort(() => Math.random() - 0.5);
-
-    for (let i = 0; i < botones.length; i++) {
-        botones[i].textContent = opciones[i];
-        botones[i].onclick = () => verificarRespuesta(opciones[i]);
-    }
+if (localStorage.getItem("aciertos")) {
+  aciertos = parseInt(localStorage.getItem("aciertos"));
+  errores = parseInt(localStorage.getItem("errores"));
+  actualizarMarcador();
 }
 
-function verificarRespuesta(opcionSeleccionada) {
-    if (opcionSeleccionada === respuestaCorrecta) {
-        aciertos++;
-    } else {
-        errores++;
+function generarPregunta() {
+  const a = Math.floor(Math.random() * 50) + 1;
+  const b = Math.floor(Math.random() * 50) + 1;
+  const operadores = ['+', '-', '*', '/'];
+  const operador = operadores[Math.floor(Math.random() * operadores.length)];
+
+  let resultado;
+  switch (operador) {
+    case '+': resultado = a + b; break;
+    case '-': resultado = a - b; break;
+    case '*': resultado = a * b; break;
+    case '/': resultado = Math.round(a / b); break;
+  }
+
+  return {
+    expresion: `${a} ${operador} ${b}`,
+    respuestaCorrecta: resultado
+  };
+}
+
+function mostrarPregunta() {
+  opcionesElem.innerHTML = "";
+
+  const { expresion, respuestaCorrecta } = generarPregunta();
+  preguntaElem.textContent = `¿Cuánto es ${expresion}?`;
+
+  const opciones = [respuestaCorrecta];
+  while (opciones.length < 4) {
+    const distractor = respuestaCorrecta + Math.floor(Math.random() * 20 - 10);
+    if (!opciones.includes(distractor)) {
+      opciones.push(distractor);
     }
-    actualizarContadores();
+  }
+
+  opciones.sort(() => Math.random() - 0.5);
+
+  opciones.forEach((opcion) => {
+    const btn = document.createElement("button");
+    btn.classList.add("opcion");
+    btn.textContent = opcion;
+    btn.onclick = () => verificarRespuesta(opcion, respuestaCorrecta);
+    opcionesElem.appendChild(btn);
+  });
 }
 
-function actualizarContadores() {
-    aciertosElem.textContent = aciertos;
-    erroresElem.textContent = errores;
+function verificarRespuesta(seleccionada, correcta) {
+  if (seleccionada === correcta) {
+    aciertos++;
+  } else {
+    errores++;
+  }
+
+  actualizarMarcador();
+  guardarResultados();
+  mostrarPregunta();
 }
 
-continuarBtn.onclick = nuevaPregunta;
+function actualizarMarcador() {
+  aciertosElem.textContent = aciertos;
+  erroresElem.textContent = errores;
+}
 
+function guardarResultados() {
+  localStorage.setItem("aciertos", aciertos);
+  localStorage.setItem("errores", errores);
+}
 
-nuevaPregunta();
+function reiniciarJuego() {
+  aciertos = 0;
+  errores = 0;
+  actualizarMarcador();
+  localStorage.removeItem("aciertos");
+  localStorage.removeItem("errores");
+  mostrarPregunta();
+}
+
+document.getElementById("reiniciar").onclick = reiniciarJuego;
+
+mostrarPregunta();
