@@ -124,7 +124,6 @@ function agregarABitacoraVisual(respuesta) {
   const botonCerrar = document.createElement("boton");
   botonCerrar.textContent = "x"; // ícono de cerrar
   botonCerrar.style.contain="1px";
-  botonCerrar.style.marginLeft = "20px"; // espacio entre el texto y el botón
   botonCerrar.style.cursor = "pointer";
   botonCerrar.onclick = function () {
     item.remove(); // Elimina el <li> del DOM
