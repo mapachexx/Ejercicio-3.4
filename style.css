@@ -1,8 +1,10 @@
+
 body {
   font-family: sans-serif;
-  background-color: #f4f4f4;
+  background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
 .main-container {
@@ -18,25 +20,70 @@ body {
 .juego {
   background-color: white;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 90%;
   text-align: center;
+}
+
+.juego h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+#pregunta {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+#opciones button {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#opciones button:hover {
+  background-color: #e0f0ff;
+  border-color: #007bff;
+}
+
+#reiniciar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+#reiniciar:hover {
+  background-color: #0056b3;
 }
 
 .bitacora {
   background-color: #fff;
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   max-width: 300px;
   width: 100%;
 }
 
 .bitacora h2 {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
 }
 
@@ -44,7 +91,7 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 #lista-bitacora li {
@@ -52,31 +99,19 @@ body {
   border-left: 4px solid #ccc;
   padding-left: 0.5rem;
   word-wrap: break-word;
+  transition: all 0.3s;
 }
 
 .correcta {
   border-color: #4caf50;
   color: #2e7d32;
+  background-color: #e8f5e9;
 }
 
 .incorrecta {
   border-color: #f44336;
   color: #b71c1c;
-}
-
-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #1976d2;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #1565c0;
+  background-color: #ffebee;
 }
 
 @media (max-width: 768px) {
@@ -85,7 +120,10 @@ button:hover {
     align-items: center;
   }
 
-  .bitacora {
+  .juego, .bitacora {
     max-width: 90%;
   }
 }
+
+
+
