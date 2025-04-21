@@ -1,50 +1,91 @@
 body {
-    font-family: sans-serif;
-    background-color: #eef2f3;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+  font-family: sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+.juego {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.bitacora {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 300px;
+  width: 100%;
+}
+
+.bitacora h2 {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+#lista-bitacora {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+#lista-bitacora li {
+  margin-bottom: 0.5rem;
+  border-left: 4px solid #ccc;
+  padding-left: 0.5rem;
+  word-wrap: break-word;
+}
+
+.correcta {
+  border-color: #4caf50;
+  color: #2e7d32;
+}
+
+.incorrecta {
+  border-color: #f44336;
+  color: #b71c1c;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1565c0;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
   }
-  
-  .container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 300px;
-    text-align: center;
+
+  .bitacora {
+    max-width: 90%;
   }
-  
-  h1 {
-    margin-bottom: 1rem;
-  }
-  
-  #question {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-  
-  button {
-    display: block;
-    width: 100%;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  #feedback {
-    margin-top: 1rem;
-    font-weight: bold;
-  }
-  
+}

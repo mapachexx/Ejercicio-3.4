@@ -2,9 +2,11 @@ const preguntaElem = document.getElementById("pregunta");
 const opcionesElem = document.getElementById("opciones");
 const aciertosElem = document.getElementById("aciertos");
 const erroresElem = document.getElementById("errores");
+const listaBitacora = document.getElementById("lista-bitacora");
 
 let aciertos = 0;
 let errores = 0;
+let bitacora = [];
 
 if (localStorage.getItem("aciertos")) {
   aciertos = parseInt(localStorage.getItem("aciertos"));
@@ -13,8 +15,10 @@ if (localStorage.getItem("aciertos")) {
 }
 
 function generarPregunta() {
-  const a = Math.floor(Math.random() * 50) + 1;
-  const b = Math.floor(Math.random() * 50) + 1;
+  const dificultad = 10 + aciertos * 5;
+
+  const a = Math.floor(Math.random() * dificultad) + 1;
+  const b = Math.floor(Math.random() * dificultad) + 1;
   const operadores = ['+', '-', '*', '/'];
   const operador = operadores[Math.floor(Math.random() * operadores.length)];
 
@@ -52,13 +56,15 @@ function mostrarPregunta() {
     const btn = document.createElement("button");
     btn.classList.add("opcion");
     btn.textContent = opcion;
-    btn.onclick = () => verificarRespuesta(opcion, respuestaCorrecta);
+    btn.onclick = () => verificarRespuesta(opcion, respuestaCorrecta, expresion, opciones);
     opcionesElem.appendChild(btn);
   });
 }
 
-function verificarRespuesta(seleccionada, correcta) {
-  if (seleccionada === correcta) {
+function verificarRespuesta(seleccionada, correcta, expresion, opciones) {
+  const esCorrecta = seleccionada === correcta;
+
+  if (esCorrecta) {
     aciertos++;
   } else {
     errores++;
@@ -66,6 +72,18 @@ function verificarRespuesta(seleccionada, correcta) {
 
   actualizarMarcador();
   guardarResultados();
+
+  const respuesta = {
+    question: expresion,
+    options: opciones,
+    selected: seleccionada,
+    correct: esCorrecta
+  };
+
+  bitacora.push(respuesta);
+  guardarEnServidor(respuesta);
+  agregarABitacoraVisual(respuesta);
+
   mostrarPregunta();
 }
 
@@ -82,12 +100,43 @@ function guardarResultados() {
 function reiniciarJuego() {
   aciertos = 0;
   errores = 0;
+  bitacora = [];
   actualizarMarcador();
   localStorage.removeItem("aciertos");
   localStorage.removeItem("errores");
+  listaBitacora.innerHTML = "";
+
+  fetch("http://localhost:3000/respuestas", {
+    method: "DELETE"
+  });
+
   mostrarPregunta();
 }
 
 document.getElementById("reiniciar").onclick = reiniciarJuego;
 
+function agregarABitacoraVisual(respuesta) {
+  const item = document.createElement("li");
+  item.className = respuesta.correct ? "correcta" : "incorrecta";
+  item.textContent = `P: ${respuesta.question} → Elegiste: ${respuesta.selected}`;
+  listaBitacora.prepend(item);
+}
+
+function guardarEnServidor(respuesta) {
+  fetch("http://localhost:3000/respuestas", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(respuesta)
+  });
+}
+
+function cargarHistorialDesdeServidor() {
+  fetch("http://localhost:3000/respuestas")
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(respuesta => agregarABitacoraVisual(respuesta));
+    });
+}
+
+cargarHistorialDesdeServidor();
 mostrarPregunta();

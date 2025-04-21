@@ -5,17 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>calc-test</title>
   <link rel="stylesheet" href="style.css">
-  <script src="Function.js" defer></script>  
+  <script src="function.js" defer></script>  
 </head>
 <body>
-  <div class="container">
-    <h1>calc-test</h1>
-    <div id="pregunta"></div>
-    <div id="opciones"></div>
-    <p>Aciertos: <span id="aciertos">0</span></p>
-    <p>Errores: <span id="errores">0</span></p>
-    <button id="reiniciar">Reiniciar</button>
-    <p id="feedback"></p>
+  <div class="main-container">
+    <div class="juego">
+      <h1>calc-test</h1>
+      <div id="pregunta"></div>
+      <div id="opciones"></div>
+      <p>Aciertos: <span id="aciertos">0</span></p>
+      <p>Errores: <span id="errores">0</span></p>
+      <button id="reiniciar">Reiniciar</button>
+      <p id="feedback"></p>
+    </div>
+
+    <aside class="bitacora">
+      <h2>Historial</h2>
+      <ul id="lista-bitacora"></ul>
+    </aside>
   </div>
 </body>
 </html>
