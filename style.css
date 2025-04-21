@@ -25,6 +25,7 @@ body {
   text-align: center;
 }
 
+
 .bitacora {
   background-color: #fff;
   padding: 1rem;
@@ -63,7 +64,15 @@ body {
   border-color: #f44336;
   color: #b71c1c;
 }
-
+boton{
+  margin-top: 2px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border-right: 20px;
+  margin-left: 30px;
+  color: #f4f4f4;
+  background-color: #b71c1c;
+}
 button {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
