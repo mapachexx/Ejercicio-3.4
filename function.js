@@ -119,8 +119,23 @@ function agregarABitacoraVisual(respuesta) {
   const item = document.createElement("li");
   item.className = respuesta.correct ? "correcta" : "incorrecta";
   item.textContent = `P: ${respuesta.question} → Elegiste: ${respuesta.selected}`;
+
+  // Crear botón de cerrar
+  const botonCerrar = document.createElement("boton");
+  botonCerrar.textContent = "x"; // ícono de cerrar
+  botonCerrar.style.contain="1px";
+  botonCerrar.style.cursor = "pointer";
+  botonCerrar.onclick = function () {
+    item.remove(); // Elimina el <li> del DOM
+  };
+
+  // Agregar el botón al item
+  item.appendChild(botonCerrar);
+
+  // Agregar item a la lista
   listaBitacora.prepend(item);
 }
+
 
 function guardarEnServidor(respuesta) {
   fetch("http://localhost:3000/respuestas", {
